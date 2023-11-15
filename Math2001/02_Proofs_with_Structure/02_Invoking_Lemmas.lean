@@ -14,7 +14,10 @@ example {x : ℚ} (hx : 3 * x = 2) : x ≠ 1 := by
     _ < 1 := by numbers
 
 example {y : ℝ} : y ^ 2 + 1 ≠ 0 := by
-  sorry
+  apply ne_of_gt
+  calc
+    y ^ 2 + 1
+      > 0 := by extra
 
 example {a b : ℝ} (h1 : a ^ 2 + b ^ 2 = 0) : a ^ 2 = 0 := by
   apply le_antisymm
@@ -28,4 +31,10 @@ example {a b : ℝ} (h1 : a ^ 2 + b ^ 2 = 0) : a ^ 2 = 0 := by
 
 
 example {m : ℤ} (hm : m + 1 = 5) : 3 * m ≠ 6 := by
-  sorry
+  apply ne_of_gt
+  calc
+    3 * m
+      = 3 * (m + 1) - 3 := by ring
+    _ = 3 * 5 - 3 := by rw [hm]
+    _ = 12 := by ring
+    _ > 6 := by numbers
