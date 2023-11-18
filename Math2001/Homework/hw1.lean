@@ -45,4 +45,9 @@ theorem problem4 {x : ℚ} : x ^ 2 - 2 * x ≥ -1 := by
 
 /- 5 points -/
 theorem problem5 (a b : ℝ) (h1 : -b ≤ a) (h2 : a ≤ b) : a ^ 2 ≤ b ^ 2 := by
-  sorry
+  have h3 : b - a ≥ 0 := by addarith [h2]
+  have h4 : b + a ≥ 0 := by addarith [h1]
+  calc
+    a ^ 2
+    _ ≤ a ^ 2 + (b - a) * (b + a) := by extra
+    _ = b ^ 2 := by ring
